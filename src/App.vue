@@ -1,14 +1,7 @@
 <template>
-	<header class="site-header">
-		<div class="container">
-			<h1>Vue Calculator App</h1>
-		</div>
-	</header>
-	<main class="site-main">
-		<div class="container">
-			<TheCalculator />
-		</div>
-	</main>
+	<div class="container">
+		<TheCalculator />
+	</div>
 </template>
 
 <script>
@@ -170,39 +163,23 @@ table {
  */
 body {
 	font-family: var(--font-main);
-	color: var(--gray-800);
-	background-color: var(--white);
+	font-size: 1rem;
+	color: var(--gray-600);
+	background-color: var(--gray-100);
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	height: 100%;
 	display: flex;
 	justify-content: center;
-}
-
-#app {
-	width: 100%;
-	height: 100%;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
 	align-items: center;
 }
 
 .container {
-	display: flex;
 	max-width: 52rem;
 	margin: 0 auto;
 	padding: 1rem;
 	position: relative;
 }
-
-.site-header {
-	h1 {
-		text-align: center;
-	}
-}
-
-.site-main {}
 
 .fade-slide-up-enter-active {
 	animation: fade-slide-up 0.32s ease;
