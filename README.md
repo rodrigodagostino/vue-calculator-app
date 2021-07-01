@@ -1,6 +1,9 @@
 # Vue Calculator App
 
-## Possible future improvement
+## Live demo
+Deployed with [Netlify](https://v-calculator-app.netlify.app/).
+
+## Potential future features
 - Handle more than one operation before pressing “=”.
 - Improve handling of decimals when calculations are not precise (e.g., 0.2 + 0.4).
 
