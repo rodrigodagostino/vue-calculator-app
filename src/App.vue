@@ -1,7 +1,16 @@
 <template>
-	<div class="container">
-		<TheCalculator />
-	</div>
+	<main class="site-main">
+		<div class="container">
+			<TheCalculator />
+		</div>
+	</main>
+	<footer class="site-footer">
+		<div class="container">
+			<a href="https://github.com/rodrigodagostino/vue-todo-app" target="_blank">
+				Made with <img src="@/assets/vue-logo.png" alt="Vue.js logo" /> by Rodrigo D’Agostino
+			</a>
+		</div>
+	</footer>
 </template>
 
 <script>
@@ -171,7 +180,17 @@ body {
 	height: 100%;
 	display: flex;
 	justify-content: center;
-	align-items: center;
+}
+
+.site {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+
+	&::before {
+		content: '';
+		height: 2rem;
+	}
 }
 
 .container {
@@ -179,6 +198,36 @@ body {
 	margin: 0 auto;
 	padding: 1rem;
 	position: relative;
+}
+
+.site-footer {
+	font-size: 0.875rem;
+	text-align: center;
+}
+
+.site-footer .container {
+	display: flex;
+	justify-content: center;
+	padding: 1rem 0;
+}
+
+.site-footer a {
+	color: var(--gray-400);
+	text-decoration: none;
+	transition: color 0.24s ease;
+}
+
+.site-footer a:focus,
+.site-footer a:hover {
+	color: var(--gray-600);
+}
+
+.site-footer img {
+	height: 1.25rem;
+	width: auto;
+	vertical-align: middle;
+	margin: 0 0.25rem;
+	display: inline-block;
 }
 
 .fade-slide-up-enter-active {
