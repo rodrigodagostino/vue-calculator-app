@@ -7,12 +7,10 @@
 	</ul>
 </template>
 
-<script>
-export default {
-	props: {
-		history: Array,
-	},
-}
+<script setup>
+defineProps( {
+	history: Array,
+} )
 </script>
 
 <style scoped lang="scss">

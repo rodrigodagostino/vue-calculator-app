@@ -13,15 +13,8 @@
 	</footer>
 </template>
 
-<script>
+<script setup>
 import TheCalculator from '@/layouts/TheCalculator.vue'
-
-export default {
-	name: 'App',
-	components: {
-		TheCalculator,
-	},
-}
 </script>
 
 <style lang="scss">

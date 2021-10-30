@@ -29,175 +29,138 @@
 	</section>
 </template>
 
-<script>
+<script setup>
 import HistoryPanel from '@/components/HistoryPanel.vue'
 import { ref, reactive } from 'vue'
 
-export default {
-	name: 'TheCalculator',
-	components: {
-		HistoryPanel,
-	},
-	setup() {
-		const history = reactive( [] )
-		const isHistoryVisible = ref( false )
-		const currOperation = ref( '' )
-		const prevOperand = ref( null )
-		const currOperand = ref( '' )
-		let currOperator = null
-		let hasActiveOperator = false
+const history = reactive( [] )
+const isHistoryVisible = ref( false )
+const currOperation = ref( '' )
+const prevOperand = ref( null )
+const currOperand = ref( '' )
+let currOperator = null
+let hasActiveOperator = false
 
-		const toggleHistoryVisibility = () => {
-			console.log( 'Working' )
-			isHistoryVisible.value = !isHistoryVisible.value
-		}
+const toggleHistoryVisibility = () => {
+	isHistoryVisible.value = !isHistoryVisible.value
+}
 
-		const clear = () => currOperand.value = ''
+const clear = () => currOperand.value = ''
 
-		const backwardDelete = () => currOperand.value = currOperand.value.slice( 0, -1 )
+const backwardDelete = () => currOperand.value = currOperand.value.slice( 0, -1 )
 
-		const invert = () => {
-			currOperand.value =
-				currOperand.value.charAt( 0 ) !== '-'
-					? `-${ currOperand.value }`
-					: currOperand.value.slice( 1 )
-		}
+const invert = () => {
+	currOperand.value = currOperand.value.charAt( 0 ) !== '-' ? `-${ currOperand.value }` : currOperand.value.slice( 1 )
+}
 
-		const operate = {
-			'+': ( a, b ) => `${ +a + +b }`,
-			'-': ( a, b ) => `${ +a - +b }`,
-			'×': ( a, b ) => `${ +a * +b }`,
-			'÷': ( a, b ) => `${ +a / +b }`,
-			'%': a => `${ +a / 100 }`,
-		}
+const operate = {
+	'+': ( a, b ) => `${ +a + +b }`,
+	'-': ( a, b ) => `${ +a - +b }`,
+	'×': ( a, b ) => `${ +a * +b }`,
+	'÷': ( a, b ) => `${ +a / +b }`,
+	'%': a => `${ +a / 100 }`,
+}
 
-		const attachToCurrOperation = character => {
-			// If an operation has finished, reset the current operation.
-			if (
-				currOperation.value &&
-				currOperation.value[ currOperation.value.length - 1 ] === '='
-			) {
-				currOperation.value = ''
-			}
+const attachToCurrOperation = character => {
+	// If an operation has finished, reset the current operation.
+	if ( currOperation.value && currOperation.value[ currOperation.value.length - 1 ] === '=' ) {
+		currOperation.value = ''
+	}
 
-			if (
-				currOperation.value === '' &&
-				( character === '+' || character === '-' || character === '×' || character === '÷' )
-			) {
-				currOperation.value += currOperand.value + character
-			} else {
-				currOperation.value += character
-			}
-		}
+	if (
+		currOperation.value === '' &&
+		( character === '+' || character === '-' || character === '×' || character === '÷' )
+	) {
+		currOperation.value += currOperand.value + character
+	} else {
+		currOperation.value += character
+	}
+}
 
-		const attachToCurrOperand = character => {
-			// Clean up if this is the first insertion after an operator.
-			if ( hasActiveOperator ) {
-				clear()
-				hasActiveOperator = false
-			}
-			// Prevent multiple periods.
-			if ( character === '.' && currOperand.value.indexOf( '.' ) !== -1 ) return
-			// Prevent multiple zeros at the beginning.
-			if ( character === 0 && currOperand.value === 0 ) return
-			// Prevent absence of zero on initial period.
-			if ( character === '.' && currOperand.value === '' ) {
-				attachToCurrOperation( 0 )
-				currOperand.value = 0
-			}
-			currOperand.value = `${ currOperand.value }${ character }`
-			attachToCurrOperation( character )
-		}
+const attachToCurrOperand = character => {
+	// Clean up if this is the first insertion after an operator.
+	if ( hasActiveOperator ) {
+		clear()
+		hasActiveOperator = false
+	}
+	// Prevent multiple periods.
+	if ( character === '.' && currOperand.value.indexOf( '.' ) !== -1 ) return
+	// Prevent multiple zeros at the beginning.
+	if ( character === 0 && currOperand.value === 0 ) return
+	// Prevent absence of zero on initial period.
+	if ( character === '.' && currOperand.value === '' ) {
+		attachToCurrOperation( 0 )
+		currOperand.value = 0
+	}
+	currOperand.value = `${ currOperand.value }${ character }`
+	attachToCurrOperation( character )
+}
 
-		const setPrevOperand = () => {
-			prevOperand.value = currOperand.value
-		}
+const setPrevOperand = () => {
+	prevOperand.value = currOperand.value
+}
 
-		const setCurrOperand = () => {
-			if ( currOperator === '%' ) {
-				currOperand.value = operate[ currOperator ]( currOperand.value )
-			} else {
-				currOperand.value = operate[ currOperator ]( prevOperand.value, currOperand.value )
-			}
-		}
+const setCurrOperand = () => {
+	if ( currOperator === '%' ) {
+		currOperand.value = operate[ currOperator ]( currOperand.value )
+	} else {
+		currOperand.value = operate[ currOperator ]( prevOperand.value, currOperand.value )
+	}
+}
 
-		const attachToHistory = () => {
-			if ( currOperator === '%' ) {
-				history.push( currOperation.value + operate[ currOperator ]( currOperand.value ) )
-			} else {
-				history.push(
-					currOperation.value +
-						operate[ currOperator ]( prevOperand.value, currOperand.value ),
-				)
-			}
-		}
+const attachToHistory = () => {
+	if ( currOperator === '%' ) {
+		history.push( currOperation.value + operate[ currOperator ]( currOperand.value ) )
+	} else {
+		history.push( currOperation.value + operate[ currOperator ]( prevOperand.value, currOperand.value ) )
+	}
+}
 
-		const add = () => {
-			currOperator = '+'
-			hasActiveOperator = true
-			attachToCurrOperation( '+' )
-			setPrevOperand()
-		}
+const add = () => {
+	currOperator = '+'
+	hasActiveOperator = true
+	attachToCurrOperation( '+' )
+	setPrevOperand()
+}
 
-		const subtract = () => {
-			currOperator = '-'
-			hasActiveOperator = true
-			attachToCurrOperation( '-' )
-			setPrevOperand()
-		}
+const subtract = () => {
+	currOperator = '-'
+	hasActiveOperator = true
+	attachToCurrOperation( '-' )
+	setPrevOperand()
+}
 
-		const multiply = () => {
-			currOperator = '×'
-			hasActiveOperator = true
-			attachToCurrOperation( '×' )
-			setPrevOperand()
-		}
+const multiply = () => {
+	currOperator = '×'
+	hasActiveOperator = true
+	attachToCurrOperation( '×' )
+	setPrevOperand()
+}
 
-		const divide = () => {
-			currOperator = '÷'
-			hasActiveOperator = true
-			attachToCurrOperation( '÷' )
-			setPrevOperand()
-		}
+const divide = () => {
+	currOperator = '÷'
+	hasActiveOperator = true
+	attachToCurrOperation( '÷' )
+	setPrevOperand()
+}
 
-		const percent = () => {
-			currOperator = '%'
-			// Will allow for a new operation to start if a digit is pressed instead of an operator.
-			hasActiveOperator = true
-			attachToCurrOperation( '%=' )
-			attachToHistory()
-			setCurrOperand()
-			prevOperand.value = null
-		}
+const percent = () => {
+	currOperator = '%'
+	// Will allow for a new operation to start if a digit is pressed instead of an operator.
+	hasActiveOperator = true
+	attachToCurrOperation( '%=' )
+	attachToHistory()
+	setCurrOperand()
+	prevOperand.value = null
+}
 
-		const equal = () => {
-			attachToCurrOperation( '=' )
-			attachToHistory()
-			setCurrOperand()
-			prevOperand.value = null
-			// Will allow for a new operation to start if a digit is pressed instead of an operator.
-			hasActiveOperator = true
-		}
-
-		return {
-			history,
-			isHistoryVisible,
-			toggleHistoryVisibility,
-			currOperation,
-			prevOperand,
-			currOperand,
-			clear,
-			percent,
-			backwardDelete,
-			invert,
-			attachToCurrOperand,
-			add,
-			subtract,
-			multiply,
-			divide,
-			equal,
-		}
-	},
+const equal = () => {
+	attachToCurrOperation( '=' )
+	attachToHistory()
+	setCurrOperand()
+	prevOperand.value = null
+	// Will allow for a new operation to start if a digit is pressed instead of an operator.
+	hasActiveOperator = true
 }
 </script>
 
