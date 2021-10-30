@@ -1,5 +1,5 @@
 {
-	"printWidth": 100,
+	"printWidth": 120,
 	"tabWidth": 4,
 	"useTabs": true,
 	"semi": false,
@@ -11,9 +11,17 @@
 	"arrowParens": "always",
 	"overrides": [
 		{
+			"files": [".*", ".*.js", "package.json"],
+			"options": {
+				"tabWidth": 2,
+				"useTabs": false,
+				"singleQuote": false
+			}
+		},
+		{
 			"files": ["*.scss", "*.css"],
 			"options": {
-				"printWidth": 80,
+				"printWidth": 100,
 				"singleQuote": false
 			}
 		}

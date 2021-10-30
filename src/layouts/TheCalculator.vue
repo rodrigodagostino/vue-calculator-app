@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import HistoryPanel from '../components/HistoryPanel.vue'
+import HistoryPanel from '@/components/HistoryPanel.vue'
 import { ref, reactive } from 'vue'
 
 export default {

@@ -3,9 +3,10 @@ module.exports = {
 	env: {
 		node: true,
 	},
-	extends: [ 'plugin:vue/vue3-essential', 'eslint:recommended' ],
+	extends: [ 'eslint:recommended', 'plugin:vue/vue3-essential' ],
 	parserOptions: {
 		parser: 'babel-eslint',
+		ecmaVersion: 2018,
 	},
 	rules: {
 		'array-bracket-spacing': [ 'error', 'always' ],

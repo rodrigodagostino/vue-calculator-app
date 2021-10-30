@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import TheCalculator from './layouts/TheCalculator.vue'
+import TheCalculator from '@/layouts/TheCalculator.vue'
 
 export default {
 	name: 'App',
