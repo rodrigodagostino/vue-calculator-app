@@ -5,26 +5,26 @@
 		</button>
 		<p class="current-operation">{{ currOperation }}</p>
 		<div class="display">{{ currOperand || 0 }}</div>
-		<button type="button" @click="clear" class="button helper">C</button>
-		<button type="button" @click="percent" class="button helper">%</button>
-		<button type="button" @click="backwardDelete" class="button helper">⌫</button>
-		<button type="button" @click="divide" class="button operator">÷</button>
-		<button type="button" @click="attachToCurrOperand(7)" class="button">7</button>
-		<button type="button" @click="attachToCurrOperand(8)" class="button">8</button>
-		<button type="button" @click="attachToCurrOperand(9)" class="button">9</button>
-		<button type="button" @click="multiply" class="button operator">×</button>
-		<button type="button" @click="attachToCurrOperand(4)" class="button">4</button>
-		<button type="button" @click="attachToCurrOperand(5)" class="button">5</button>
-		<button type="button" @click="attachToCurrOperand(6)" class="button">6</button>
-		<button type="button" @click="subtract" class="button operator">-</button>
-		<button type="button" @click="attachToCurrOperand(1)" class="button">1</button>
-		<button type="button" @click="attachToCurrOperand(2)" class="button">2</button>
-		<button type="button" @click="attachToCurrOperand(3)" class="button">3</button>
-		<button type="button" @click="add" class="button operator">+</button>
-		<button type="button" @click="invert" class="button">±</button>
-		<button type="button" @click="attachToCurrOperand(0)" class="button">0</button>
-		<button type="button" @click="attachToCurrOperand('.')" class="button">.</button>
-		<button type="button" @click="equal" class="button operator">=</button>
+		<button class="button helper" id="button-delete" @click="clear">C</button>
+		<button class="button helper" id="button-percent" @click="percent">%</button>
+		<button class="button helper" id="button-clear-entry" @click="clearEntry">⌫</button>
+		<button class="button operator" id="button-divide" @click="divide">÷</button>
+		<button class="button" id="button-seven" @click="attachToCurrOperand(7)">7</button>
+		<button class="button" id="button-eight" @click="attachToCurrOperand(8)">8</button>
+		<button class="button" id="button-nine" @click="attachToCurrOperand(9)">9</button>
+		<button class="button operator" id="button-multiply" @click="multiply">×</button>
+		<button class="button" id="button-four" @click="attachToCurrOperand(4)">4</button>
+		<button class="button" id="button-five" @click="attachToCurrOperand(5)">5</button>
+		<button class="button" id="button-six" @click="attachToCurrOperand(6)">6</button>
+		<button class="button operator" id="button-subtract" @click="subtract">-</button>
+		<button class="button" id="button-one" @click="attachToCurrOperand(1)">1</button>
+		<button class="button" id="button-two" @click="attachToCurrOperand(2)">2</button>
+		<button class="button" id="button-three" @click="attachToCurrOperand(3)">3</button>
+		<button class="button operator" id="button-add" @click="add">+</button>
+		<button class="button" id="button-one" @click="negate">±</button>
+		<button class="button" id="button-zero" @click="attachToCurrOperand(0)">0</button>
+		<button class="button" id="button-period" @click="attachToCurrOperand('.')">.</button>
+		<button class="button operator" id="button-equal" @click="equal">=</button>
 		<HistoryPanel :history="history" :class="{ 'is-visible': isHistoryVisible }" />
 	</section>
 </template>
@@ -47,9 +47,9 @@ const toggleHistoryVisibility = () => {
 
 const clear = () => currOperand.value = ''
 
-const backwardDelete = () => currOperand.value = currOperand.value.slice( 0, -1 )
+const clearEntry = () => currOperand.value = currOperand.value.slice( 0, -1 )
 
-const invert = () => {
+const negate = () => {
 	currOperand.value = currOperand.value.charAt( 0 ) !== '-' ? `-${ currOperand.value }` : currOperand.value.slice( 1 )
 }
 
@@ -162,6 +162,70 @@ const equal = () => {
 	// Will allow for a new operation to start if a digit is pressed instead of an operator.
 	hasActiveOperator = true
 }
+
+window.addEventListener( 'keydown', event => {
+	switch ( event.key ) {
+		case '0':
+			document.getElementById( 'button-zero' ).click()
+			break
+		case '1':
+			document.getElementById( 'button-one' ).click()
+			break
+		case '2':
+			document.getElementById( 'button-two' ).click()
+			break
+		case '3':
+			document.getElementById( 'button-three' ).click()
+			break
+		case '4':
+			document.getElementById( 'button-four' ).click()
+			break
+		case '5':
+			document.getElementById( 'button-five' ).click()
+			break
+		case '6':
+			document.getElementById( 'button-six' ).click()
+			break
+		case '7':
+			document.getElementById( 'button-seven' ).click()
+			break
+		case '8':
+			document.getElementById( 'button-eight' ).click()
+			break
+		case '9':
+			document.getElementById( 'button-nine' ).click()
+			break
+		case '.':
+			document.getElementById( 'button-period' ).click()
+			break
+		case '+':
+			document.getElementById( 'button-add' ).click()
+			break
+		case '-':
+			document.getElementById( 'button-subtract' ).click()
+			break
+		case '*':
+			document.getElementById( 'button-multiply' ).click()
+			break
+		case '/':
+			// Prevent Quick Find shortcut in Firefox.
+			event.preventDefault()
+			document.getElementById( 'button-divide' ).click()
+			break
+		case '%':
+			document.getElementById( 'button-percent' ).click()
+			break
+		case 'Enter':
+			document.getElementById( 'button-equal' ).click()
+			break
+		case 'Backspace':
+			document.getElementById( 'button-clear-entry' ).click()
+			break
+		case 'Delete':
+			document.getElementById( 'button-delete' ).click()
+			break
+	}
+} )
 </script>
 
 <style scoped lang="scss">
