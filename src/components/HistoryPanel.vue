@@ -8,9 +8,9 @@
 </template>
 
 <script setup>
-defineProps( {
+defineProps({
 	history: Array,
-} )
+})
 </script>
 
 <style scoped lang="scss">

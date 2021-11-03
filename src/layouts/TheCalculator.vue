@@ -225,7 +225,7 @@ window.addEventListener( 'keydown', event => {
 			document.getElementById( 'button-delete' ).click()
 			break
 	}
-} )
+})
 </script>
 
 <style scoped lang="scss">
