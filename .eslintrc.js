@@ -2,17 +2,13 @@ module.exports = {
 	root: true,
 	env: {
 		node: true,
-	},
-	globals: {
-		defineProps: 'readonly',
-		defineEmits: 'readonly',
-		defineExpose: 'readonly',
-		withDefaults: 'readonly',
+		'vue/setup-compiler-macros': true,
 	},
 	extends: [ 'eslint:recommended', 'plugin:vue/vue3-essential' ],
 	parserOptions: {
-		parser: 'babel-eslint',
+		parser: '@babel/eslint-parser',
 		ecmaVersion: 2018,
+		requireConfigFile: false,
 	},
 	rules: {
 		'array-bracket-spacing': [ 'error', 'always' ],
