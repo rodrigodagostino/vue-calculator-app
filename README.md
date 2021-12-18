@@ -15,31 +15,37 @@ Deployed with [Netlify](https://v-calculator-app.netlify.app/).
 ## Project setup
 
 ```
-npm install
+yarn
 ```
 
 ### Compiles and hot-reloads for development
 
 ```
-npm run dev
+yarn dev
 ```
 
 ### Compiles and minifies for production
 
 ```
-npm run build
+yarn build
 ```
 
 ### Locally preview production build
 
 ```
-npm run serve
+yarn serve
+```
+
+### Lints
+
+```
+yarn lint
 ```
 
 ### Lints and fixes files
 
 ```
-npm run lint
+yarn lint:fix
 ```
 
 ## Recommended IDE Setup
