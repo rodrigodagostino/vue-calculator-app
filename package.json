@@ -19,6 +19,7 @@
     "vue": "3.2.6"
   },
   "devDependencies": {
+    "@babel/core": "^7.16.5",
     "@babel/eslint-parser": "7.16.3",
     "@vitejs/plugin-vue": "1.10.0",
     "@vue/compiler-sfc": "3.2.22",
