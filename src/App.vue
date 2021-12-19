@@ -19,8 +19,8 @@ import TheCalculator from '@/layouts/TheCalculator.vue'
 
 <style lang="scss">
 /**
-* Variables
-*/
+ * Variables
+ */
 :root {
   --font-main: 'Rubik', Avenir, Helvetica, Arial, sans-serif;
   --color-main--lightest: #c7d2fe;
@@ -73,8 +73,8 @@ import TheCalculator from '@/layouts/TheCalculator.vue'
 }
 
 /**
-* Reset styles.
-*/
+ * Reset styles.
+ */
 html {
   box-sizing: border-box;
   height: 100%;
@@ -161,8 +161,8 @@ table {
 }
 
 /**
-* Base styles.
-*/
+ * Base styles.
+ */
 body {
   font-family: var(--font-main);
   font-size: 1rem;
@@ -223,6 +223,9 @@ body {
   display: inline-block;
 }
 
+/**
+ * Animation styles.
+ */
 .fade-slide-up-enter-active {
   animation: fade-slide-up 0.32s ease;
 }
