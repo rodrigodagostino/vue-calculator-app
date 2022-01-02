@@ -31,7 +31,7 @@
 
 <script setup>
 import HistoryPanel from '@/components/HistoryPanel.vue'
-import { ref, reactive } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
 
 const history = reactive( [] )
 const isHistoryVisible = ref( false )
@@ -163,68 +163,70 @@ const equal = () => {
   hasActiveOperator = true
 }
 
-window.addEventListener( 'keydown', event => {
-  switch ( event.key ) {
-  case '0':
-    document.getElementById( 'button-zero' ).click()
-    break
-  case '1':
-    document.getElementById( 'button-one' ).click()
-    break
-  case '2':
-    document.getElementById( 'button-two' ).click()
-    break
-  case '3':
-    document.getElementById( 'button-three' ).click()
-    break
-  case '4':
-    document.getElementById( 'button-four' ).click()
-    break
-  case '5':
-    document.getElementById( 'button-five' ).click()
-    break
-  case '6':
-    document.getElementById( 'button-six' ).click()
-    break
-  case '7':
-    document.getElementById( 'button-seven' ).click()
-    break
-  case '8':
-    document.getElementById( 'button-eight' ).click()
-    break
-  case '9':
-    document.getElementById( 'button-nine' ).click()
-    break
-  case '.':
-    document.getElementById( 'button-period' ).click()
-    break
-  case '+':
-    document.getElementById( 'button-add' ).click()
-    break
-  case '-':
-    document.getElementById( 'button-subtract' ).click()
-    break
-  case '*':
-    document.getElementById( 'button-multiply' ).click()
-    break
-  case '/':
+onMounted( () => {
+  window.addEventListener( 'keydown', event => {
+    switch ( event.key ) {
+    case '0':
+      document.getElementById( 'button-zero' ).click()
+      break
+    case '1':
+      document.getElementById( 'button-one' ).click()
+      break
+    case '2':
+      document.getElementById( 'button-two' ).click()
+      break
+    case '3':
+      document.getElementById( 'button-three' ).click()
+      break
+    case '4':
+      document.getElementById( 'button-four' ).click()
+      break
+    case '5':
+      document.getElementById( 'button-five' ).click()
+      break
+    case '6':
+      document.getElementById( 'button-six' ).click()
+      break
+    case '7':
+      document.getElementById( 'button-seven' ).click()
+      break
+    case '8':
+      document.getElementById( 'button-eight' ).click()
+      break
+    case '9':
+      document.getElementById( 'button-nine' ).click()
+      break
+    case '.':
+      document.getElementById( 'button-period' ).click()
+      break
+    case '+':
+      document.getElementById( 'button-add' ).click()
+      break
+    case '-':
+      document.getElementById( 'button-subtract' ).click()
+      break
+    case '*':
+      document.getElementById( 'button-multiply' ).click()
+      break
+    case '/':
     // Prevent Quick Find shortcut in Firefox.
-    event.preventDefault()
-    document.getElementById( 'button-divide' ).click()
-    break
-  case '%':
-    document.getElementById( 'button-percent' ).click()
-    break
-  case 'Enter':
-    document.getElementById( 'button-equal' ).click()
-    break
-  case 'Backspace':
-    document.getElementById( 'button-clear-entry' ).click()
-    break
-  case 'Delete':
-    document.getElementById( 'button-delete' ).click()
-    break
-  }
+      event.preventDefault()
+      document.getElementById( 'button-divide' ).click()
+      break
+    case '%':
+      document.getElementById( 'button-percent' ).click()
+      break
+    case 'Enter':
+      document.getElementById( 'button-equal' ).click()
+      break
+    case 'Backspace':
+      document.getElementById( 'button-clear-entry' ).click()
+      break
+    case 'Delete':
+      document.getElementById( 'button-delete' ).click()
+      break
+    }
+  })
 })
 </script>
 
