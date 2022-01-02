@@ -31,6 +31,7 @@ module.exports = {
     'comma-spacing': 'error',
     'comma-style': 'error',
     'computed-property-spacing': [ 'error', 'always' ],
+    'eol-last': 'error',
     'func-call-spacing': 'error',
     indent: [ 'error', 2 ],
     'key-spacing': [ 'error', { afterColon: true } ],
